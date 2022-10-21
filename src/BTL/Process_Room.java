@@ -122,6 +122,32 @@ public class Process_Room {
 		}
 		return r;
 	}
+	static public ArrayList<Vector<Object>> getRoomByTypeRoom(String typeRoom){
+		Connection cn = getCon();
+		String sql = "Select * from hotel_management.room where typeRoom = ?";
+		ArrayList<Vector<Object>>  ls_room = new ArrayList<>();
+		try {
+			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
+			ps.setString(1, typeRoom);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Vector<Object> r = new Vector<>();
+				r.add(rs.getString("idRoom"));
+				r.add(rs.getString("nameRoom"));
+				r.add(rs.getString("typeRoom"));
+				r.add(rs.getInt("priceRoom"));
+				r.add(rs.getString("stateRoom"));
+				r.add(rs.getString("noteRoom"));
+				r.add(rs.getString("idStaff"));
+				r.add(rs.getString("idService"));
+				ls_room.add(r);
+			}
+		}
+			catch(SQLException e) {
+				
+			}
+		return ls_room;
+	}
 	public ArrayList<Object> getListIdRoom() {
 		Connection cn = getCon();
 		String sql = "Select idRoom from hotel_management.room";
@@ -225,6 +251,6 @@ public class Process_Room {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(getCon());
+		System.out.println(getRoomByTypeRoom("Normal").size());
 	}
 }

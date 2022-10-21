@@ -33,9 +33,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 public class GUI_Statistical extends JFrame {
-
+	
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField tf_year;
@@ -45,7 +46,7 @@ public class GUI_Statistical extends JFrame {
 	private Vector<String> columns3 = new Vector<>();
 	private Vector<String> columns4 = new Vector<>();
 	private DefaultTableModel dtm = new DefaultTableModel();
-	private Process_Statistical ps = new Process_Statistical();
+	private Process_Project pp = new Process_Project();
 	private Customer c = new Customer();
 	private ArrayList<Vector<Object>> lst = new ArrayList<>();
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -87,7 +88,7 @@ public class GUI_Statistical extends JFrame {
 		panel_1.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Th\u1ED1ng k\u00EA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.setBounds(26, 28, 382, 513);
+		panel_1.setBounds(24, 30, 382, 513);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -165,7 +166,7 @@ public class GUI_Statistical extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(103, 443, 127, 29);
+		btnNewButton.setBounds(75, 448, 105, 23);
 		panel_1.add(btnNewButton);
 
 		JLabel lblNm = new JLabel("Năm");
@@ -254,6 +255,17 @@ public class GUI_Statistical extends JFrame {
 		tf_ageCustomer.setEditable(false);
 		tf_nationalityCustomer.setEditable(false);
 		tf_genderCustomer.setEditable(false);
+		
+		JButton btn_exit = new JButton("Thoát");
+		btn_exit.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\exit.png"));
+		btn_exit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exitForm();
+			}
+		});
+		btn_exit.setBounds(203, 448, 96, 23);
+		panel_1.add(btn_exit);
 
 		columns2.add("Mã khách hàng");
 		columns2.add("Chứng minh thư");
@@ -292,7 +304,7 @@ public class GUI_Statistical extends JFrame {
 		dtm.setNumRows(0);
 		
 		
-		lst = ps.getList_byMonthAndYear(month, year);
+		lst = pp.getList_byMonthAndYear(month, year);
 		for (int i = 0; i < lst.size(); i++) {
 			Vector<Object> x = lst.get(i);
 			Vector<Object> tbrow = new Vector<>();
@@ -314,7 +326,7 @@ public class GUI_Statistical extends JFrame {
 		dtm.setNumRows(0);
 		
 		
-		lst = ps.getList_Customer();
+		lst = pp.getList_Customer();
 		for (int i = 0; i < lst.size(); i++) {
 			Vector<Object> x = lst.get(i);
 			Vector<Object> tbrow = new Vector<>();
@@ -335,7 +347,7 @@ public class GUI_Statistical extends JFrame {
 	
 	private void getList_Room() {
 		dtm.setNumRows(0);
-		lst = ps.getList_room();
+		lst = pp.getList_room();
 		for (int i = 0; i < lst.size(); i++) {
 			Vector<Object> x = lst.get(i);
 			Vector<Object> tbrow = new Vector<>();
@@ -356,7 +368,7 @@ public class GUI_Statistical extends JFrame {
 	}
 	
 	public void getCustomer(String idCustomer) {
-		c = ps.get_Customer(idCustomer);
+		c = pp.get_Customer(idCustomer);
 		tf_nameCustomer.setText(c.getNameCustomer());
 		tf_ageCustomer.setText(c.getAgeCustomer()+"");
 		tf_nationalityCustomer.setText(c.getNationalityCustomer());
@@ -368,7 +380,7 @@ public class GUI_Statistical extends JFrame {
 	
 	public void getCustomer_checkOut() {
 		dtm.setNumRows(0);
-		lst = ps.getList_CustomerCheckOut();
+		lst = pp.getList_CustomerCheckOut();
 		for(int i=0;i<lst.size();i++) {
 			Vector<Object> x = lst.get(i);
 			Vector<Object> tbrow = new Vector<>();
@@ -380,8 +392,16 @@ public class GUI_Statistical extends JFrame {
 			tbrow.add(x.get(5));
 			rows.add(tbrow);
 		}
+	
 		dtm.setDataVector(rows, columns4);
 		dtm.insertRow(0, columns4);
 		table.setModel(dtm);
+	}
+	public void exitForm() {
+		if(JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không?","Thoát", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
+			this.setVisible(false);
+			GUI_FrameMain e = new GUI_FrameMain();
+			e.setVisible(true);
+		}
 	}
 }

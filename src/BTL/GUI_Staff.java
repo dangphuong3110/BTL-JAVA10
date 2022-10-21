@@ -51,7 +51,7 @@ public class GUI_Staff extends JFrame {
 	Vector<String> columns = new Vector<>();
 	Vector<Vector<Object>> rows = new Vector<>();
 	DefaultTableModel dtm = new DefaultTableModel();
-	Process_Staff ps = new Process_Staff();
+	Process_Project pp = new Process_Project();
 	private JPanel contentPane;
 	private JTable tb_staff;
 	private JTextField tf_id;
@@ -87,10 +87,10 @@ public class GUI_Staff extends JFrame {
 	 */
 	public GUI_Staff() {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("D:\\Java_62TH5\\Java2022_62TH5\\conssAPP\\BTL_10\\src\\image\\staffj.png"));
+				.getImage("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\staff1.png"));
 		setTitle("Quản lý nhân viên");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1078, 616);
+		setBounds(100, 100, 1280, 616);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(128, 255, 255));
 		contentPane.setForeground(Color.BLACK);
@@ -158,9 +158,9 @@ public class GUI_Staff extends JFrame {
 				getListStaff();
 			}
 		});
-		bt_insert.setBounds(10, 324, 96, 41);
+		bt_insert.setBounds(10, 324, 108, 30);
 		panel_1.add(bt_insert);
-		bt_insert.setIcon(new ImageIcon("D:\\Java_62TH5\\Java2022_62TH5\\conssAPP\\BTL_10\\src\\image\\insertj.png"));
+		bt_insert.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\add.png"));
 		bt_insert.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		JButton bt_update = new JButton("Chỉnh sửa");
@@ -177,9 +177,10 @@ public class GUI_Staff extends JFrame {
 				getListStaff();
 			}
 		});
-		bt_update.setBounds(140, 324, 129, 41);
+		bt_update.setBounds(154, 324, 119, 30);
 		panel_1.add(bt_update);
-		bt_update.setIcon(new ImageIcon("D:\\Java_62TH5\\Java2022_62TH5\\conssAPP\\BTL_10\\src\\image\\updatej.png"));
+		bt_update.setIcon(
+				new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\update.png"));
 		bt_update.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		JButton bt_delete = new JButton("Xóa");
@@ -188,9 +189,10 @@ public class GUI_Staff extends JFrame {
 				delete(tf_id.getText());
 			}
 		});
-		bt_delete.setBounds(304, 324, 119, 41);
+		bt_delete.setBounds(315, 324, 108, 30);
 		panel_1.add(bt_delete);
-		bt_delete.setIcon(new ImageIcon("D:\\Java_62TH5\\Java2022_62TH5\\conssAPP\\BTL_10\\src\\image\\deletej.png"));
+		bt_delete.setIcon(
+				new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\delete.png"));
 		bt_delete.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		tf_contact = new JTextField();
@@ -233,7 +235,7 @@ public class GUI_Staff extends JFrame {
 				search_name(tf_name.getText());
 			}
 		});
-		bt_search.setBounds(315, 44, 108, 41);
+		bt_search.setBounds(315, 49, 108, 30);
 		panel_1.add(bt_search);
 		bt_search.setIcon(new ImageIcon("D:\\Java_62TH5\\Java2022_62TH5\\conssAPP\\BTL_10\\src\\image\\zoom.png"));
 		bt_search.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -262,20 +264,21 @@ public class GUI_Staff extends JFrame {
 				tf_id.setEnabled(true);
 			}
 		});
-		bt_clear.setIcon(new ImageIcon("D:\\Java_62TH5\\Java2022_62TH5\\conssAPP\\BTL_10\\src\\image\\clearj.png"));
+		bt_clear.setIcon(
+				new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\clear.png"));
 		bt_clear.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bt_clear.setBounds(77, 389, 96, 41);
+		bt_clear.setBounds(77, 389, 101, 30);
 		panel_1.add(bt_clear);
 
 		JButton bt_exit = new JButton("Thoát");
 		bt_exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				exitForm();
 			}
 		});
-		bt_exit.setIcon(new ImageIcon("D:\\Java_62TH5\\Java2022_62TH5\\conssAPP\\BTL_10\\src\\image\\exit.png"));
+		bt_exit.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\exit.png"));
 		bt_exit.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bt_exit.setBounds(250, 389, 96, 41);
+		bt_exit.setBounds(250, 389, 101, 30);
 		panel_1.add(bt_exit);
 
 		dC_birthofday = new JDateChooser();
@@ -307,7 +310,7 @@ public class GUI_Staff extends JFrame {
 
 			}
 		});
-		tb_staff.setBounds(447, 99, 607, 338);
+		tb_staff.setBounds(447, 99, 809, 363);
 		contentPane.add(tb_staff);
 
 		JButton bt_list = new JButton("Tất cả danh sách");
@@ -318,7 +321,7 @@ public class GUI_Staff extends JFrame {
 		});
 		bt_list.setBackground(SystemColor.text);
 		bt_list.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bt_list.setBounds(913, 77, 141, 21);
+		bt_list.setBounds(1115, 70, 141, 21);
 		contentPane.add(bt_list);
 
 		columns.add("ID");
@@ -333,8 +336,8 @@ public class GUI_Staff extends JFrame {
 
 	public void getListStaff() {
 		dtm.setRowCount(0);
-		for (int i = 0; i < ps.getListStaff().size(); i++) {
-			Vector<Object> s = (Vector<Object>) ps.getListStaff().get(i);
+		for (int i = 0; i < pp.getListStaff().size(); i++) {
+			Vector<Object> s = (Vector<Object>) pp.getListStaff().get(i);
 			Vector<Object> tbrow = new Vector<>();
 			tbrow.add(s.get(0));
 			tbrow.add(s.get(1));
@@ -362,7 +365,7 @@ public class GUI_Staff extends JFrame {
 		if (rd_nam.isSelected())
 			gender = true;
 		contact = tf_contact.getText();
-		if (ps.insertStaff(id, name, position, salary, dateofbirth, gender, contact))
+		if (pp.insertStaff(id, name, position, salary, dateofbirth, gender, contact))
 			JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 		else
 			JOptionPane.showMessageDialog(null, "Bạn đang gặp vấn đề với chức năng này!", "Thông báo",
@@ -381,7 +384,7 @@ public class GUI_Staff extends JFrame {
 		if (rd_nam.isSelected())
 			gender = true;
 		contact = tf_contact.getText();
-		if (ps.updateStaff(id, name, position, salary, dateofbirth, gender, contact))
+		if (pp.updateStaff(id, name, position, salary, dateofbirth, gender, contact))
 			JOptionPane.showMessageDialog(null, "Cập nhật thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 		else
 			JOptionPane.showMessageDialog(null, "Bạn đang gặp vấn đề với chức năng này!", "Thông báo",
@@ -395,7 +398,7 @@ public class GUI_Staff extends JFrame {
 		if (selectedRow.length == 1) {
 			if (JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa dòng này không?", "Question",
 					JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-				if (ps.delete(id)) {
+				if (pp.delete(id)) {
 					getListStaff();
 					JOptionPane.showMessageDialog(null, "Xóa thành công", "Message", JOptionPane.INFORMATION_MESSAGE);
 					tf_id.setText("");
@@ -415,18 +418,17 @@ public class GUI_Staff extends JFrame {
 					JOptionPane.showMessageDialog(null, "Xóa thất bại", "Message", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
-		}
-		else {
+		} else {
 			if (JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa dòng này không?", "Question",
 					JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
 				int check = 0;
-				for(int i : selectedRow) {
-					id= rows.get(i-check).get(0).toString();
-					if(ps.delete(id))
+				for (int i : selectedRow) {
+					id = rows.get(i - check).get(0).toString();
+					if (pp.delete(id))
 						getListStaff();
-						check++;
+					check++;
 				}
-				if (check>0) {
+				if (check > 0) {
 					JOptionPane.showMessageDialog(null, "Xóa thành công", "Message", JOptionPane.INFORMATION_MESSAGE);
 					tf_id.setText("");
 					tf_name.setText("");
@@ -452,8 +454,8 @@ public class GUI_Staff extends JFrame {
 	// Tìm kiếm theo tên
 	public void search_name(String name) {
 		dtm.setRowCount(0);
-		for (int i = 0; i < ps.search_byname(name).size(); i++) {
-			Vector<Object> st = (Vector<Object>) ps.search_byname(name).get(i);
+		for (int i = 0; i < pp.search_byname(name).size(); i++) {
+			Vector<Object> st = (Vector<Object>) pp.search_byname(name).get(i);
 			Vector<Object> tbrow = new Vector<>();
 			tbrow.add(st.get(0));
 			tbrow.add(st.get(1));
@@ -467,5 +469,14 @@ public class GUI_Staff extends JFrame {
 		dtm.setDataVector(rows, columns);
 		dtm.insertRow(0, columns);
 		tb_staff.setModel(dtm);
+	}
+
+	public void exitForm() {
+		if (jOP_Check.showConfirmDialog(null, "Bạn có muốn thoát không?", "Thoát",
+				jOP_Check.YES_NO_CANCEL_OPTION) == 0) {
+			this.setVisible(false);
+			GUI_FrameMain e = new GUI_FrameMain();
+			e.setVisible(true);
+		}
 	}
 }

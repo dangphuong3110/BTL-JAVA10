@@ -42,6 +42,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.Toolkit;
 
 public class GUI_Bill extends JFrame {
 
@@ -60,7 +61,7 @@ public class GUI_Bill extends JFrame {
 	private Vector<Vector<Object>> rows = new Vector<>();
 	private DefaultTableModel dtm = new DefaultTableModel();
 	private ArrayList<Vector<Object>> B = new ArrayList<>();
-	private Process_Bill pb = new Process_Bill();
+	private Process_Project pp = new Process_Project();
 	private ArrayList<Staff> s;
 	private ArrayList<String> lsnr, lsids, lsidr;
 	/**
@@ -83,9 +84,10 @@ public class GUI_Bill extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI_Bill() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\bill.png"));
 		setTitle("Thông tin hóa đơn");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 960, 505);
+		setBounds(100, 100, 1280, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.CYAN);
 		contentPane.setForeground(Color.BLACK);
@@ -96,11 +98,12 @@ public class GUI_Bill extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Th\u00F4ng tin h\u00F3a \u0111\u01A1n", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(21, 42, 341, 398);
+		panel_2.setBounds(21, 42, 386, 426);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JButton btn_Insert = new JButton("Thêm");
+		btn_Insert.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\add.png"));
 		btn_Insert.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_Insert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,20 +112,22 @@ public class GUI_Bill extends JFrame {
 			}
 		});
 		btn_Insert.setSelectedIcon(new ImageIcon("C:\\Users\\Hi Windows 10\\Pictures\\Camera Roll\\307250204_598143505384664_999337979866899336_n.png"));
-		btn_Insert.setBounds(24, 282, 85, 21);
+		btn_Insert.setBounds(24, 282, 98, 21);
 		panel_2.add(btn_Insert);
 		
 		JButton btn_Update = new JButton("Sửa");
+		btn_Update.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\update.png"));
 		btn_Update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateBill();
 			}
 		});
 		btn_Update.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_Update.setBounds(125, 282, 85, 21);
+		btn_Update.setBounds(136, 282, 104, 21);
 		panel_2.add(btn_Update);
 		
 		JButton btn_Clear = new JButton("Clear");
+		btn_Clear.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\clear.png"));
 		btn_Clear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -134,31 +139,31 @@ public class GUI_Bill extends JFrame {
 			}
 		});
 		btn_Clear.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_Clear.setBounds(125, 325, 85, 21);
+		btn_Clear.setBounds(136, 325, 104, 21);
 		panel_2.add(btn_Clear);
 		
 		JButton btn_Delete = new JButton("Xóa");
+		btn_Delete.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\delete.png"));
 		btn_Delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				deleteBill();
 			}
 		});
 		btn_Delete.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_Delete.setBounds(231, 282, 85, 21);
+		btn_Delete.setBounds(259, 282, 98, 21);
 		panel_2.add(btn_Delete);
 		
 		JButton btn_Exit = new JButton("Thoát");
+		btn_Exit.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\exit.png"));
 		btn_Exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// thoat
-				if(jOP_Check.showConfirmDialog(null, "Bạn có muốn thoát chương trình?", "Thoát", jOP_Check.YES_NO_OPTION) == 0) {
-					System.exit(0);
-				}
+				exitForm();
 				
 			}
 		});
 		btn_Exit.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_Exit.setBounds(231, 325, 85, 21);
+		btn_Exit.setBounds(259, 325, 98, 21);
 		panel_2.add(btn_Exit);
 		
 		JLabel lblNewLabel = new JLabel("Mã hóa đơn");
@@ -237,7 +242,7 @@ public class GUI_Bill extends JFrame {
 		cb_idRoom.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(cb_idRoom.getSelectedItem() != null) {
-					String dateCheckOut = pb.getDateCheckOut(cb_idRoom.getSelectedItem().toString());
+					String dateCheckOut = pp.getDateCheckOut(cb_idRoom.getSelectedItem().toString());
 					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 					if(dateCheckOut.equals("")==false) {
 						try {
@@ -264,7 +269,7 @@ public class GUI_Bill extends JFrame {
 				findBill();
 			}
 		});
-		btn_Find.setBounds(24, 326, 85, 21);
+		btn_Find.setBounds(24, 326, 98, 21);
 		panel_2.add(btn_Find);
 		
 		
@@ -307,7 +312,7 @@ public class GUI_Bill extends JFrame {
 			}
 		});
 		tb_Bill.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		tb_Bill.setBounds(391, 64, 545, 357);
+		tb_Bill.setBounds(450, 64, 806, 357);
 		contentPane.add(tb_Bill);
 	
 		columns.add("Mã hóa đơn");
@@ -318,7 +323,7 @@ public class GUI_Bill extends JFrame {
 		
 		getAllBill();
 		// combobox nameStaff
-		s = pb.findingStaff();
+		s = pp.findingStaff();
 		for(int i=0; i<s.size(); i++) {
 			int count = 0;
 			for(int j=i+1; j<s.size(); j++)
@@ -331,7 +336,7 @@ public class GUI_Bill extends JFrame {
 	
 	private void getAllBill() {
 		dtm.setNumRows(0);
-		B = pb.getListBill();
+		B = pp.getListBill();
 		for(int i=0; i<B.size(); i++) {
 			Vector<Object> b = B.get(i);
 			Vector<Object> tbrow = new Vector<>();
@@ -358,12 +363,12 @@ public class GUI_Bill extends JFrame {
 		String idroom  = cb_idRoom.getSelectedItem().toString();
 		
 		double total = 0;
-		Vector<Object> t = pb.totalMoney(idroom);
+		Vector<Object> t = pp.totalMoney(idroom);
 		//if(!(t.get(0)+"").equals("")) {
 			total = Double.parseDouble(t.get(0)+"")*Double.parseDouble(t.get(2)+"")+Double.parseDouble(t.get(1)+""); 
 			
 			if(jOP_Check.showConfirmDialog(null, "Bạn có muốn thêm hóa đơn này?", "Thêm hóa đơn", jOP_Check.YES_NO_CANCEL_OPTION) == 0){
-				if(pb.insertBill(idbill, namestaff, nameroom, date, total) && pb.changeStateRoomA(idroom)) {
+				if(pp.insertBill(idbill, namestaff, nameroom, date, total) && pp.changeStateRoomA(idroom)) {
 					getAllBill();
 					display_nameRoom(cb_idStaff.getSelectedItem().toString());
 					jOP_Message.showMessageDialog(null, "Thêm mới hóa đơn thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -386,12 +391,12 @@ public class GUI_Bill extends JFrame {
 		String date = formatter.format(dateChooser.getDate()).toString();
 		String idroom  = cb_idRoom.getSelectedItem().toString();
 		double total = 0;
-		Vector<Object> t = pb.totalMoney(idroom);
+		Vector<Object> t = pp.totalMoney(idroom);
 		total = Double.parseDouble(t.get(0)+"")*Double.parseDouble(t.get(2)+"")+Double.parseDouble(t.get(1)+""); 
 		if(jOP_Check.showConfirmDialog(null, "Bạn có muốn cập nhật thông tin hóa đơn này?", "Cập nhật hóa đơn", jOP_Check.YES_NO_CANCEL_OPTION) == 0) {
 			int selectedRow = tb_Bill.getSelectedRow();
 			Vector<Object> row = rows.get(selectedRow);
-			if(pb.updateBill(idbill, namestaff, nameroom, date, total) && pb.changeStateRoomU(row.get(2).toString()) && pb.changeStateRoomA(idroom)) {
+			if(pp.updateBill(idbill, namestaff, nameroom, date, total) && pp.changeStateRoomU(row.get(2).toString()) && pp.changeStateRoomA(idroom)) {
 				getAllBill();
 				clear();
 				cb_nameRoom.removeItem(nameroom);
@@ -410,7 +415,7 @@ public class GUI_Bill extends JFrame {
 		String nameroom = cb_nameRoom.getSelectedItem()+"";
 		
 		if(jOP_Check.showConfirmDialog(null, "Bạn có muốn xóa thông tin hóa đơn này?", "Xóa hóa đơn", jOP_Check.YES_NO_CANCEL_OPTION) == 0) {
-			if(pb.delBill(idbill, namestaff, nameroom) == true) {
+			if(pp.delBill(idbill, namestaff, nameroom) == true) {
 				getAllBill();
 				tf_Bill.setText("");
 				tf_Bill.enable(true);
@@ -433,7 +438,7 @@ public class GUI_Bill extends JFrame {
 		
 		Vector<Object> a = new Vector<>();
 		Vector<Object> tbrow = new Vector<>();
-		a = pb.findBill(idBill);
+		a = pp.findBill(idBill);
 		if(a.size()>0) {
 			tbrow.add(a.get(0));
 			tbrow.add(a.get(1));
@@ -470,14 +475,14 @@ public class GUI_Bill extends JFrame {
 	}
 	
 	public void display_idStaff(String nameStaff) {
-		lsids = pb.finding_idStaff(nameStaff);
+		lsids = pp.finding_idStaff(nameStaff);
 		cb_idStaff.removeAllItems();
 		for(int i=0; i<lsids.size(); i++) 
 			cb_idStaff.addItem(lsids.get(i));
 	}
 	
 	public void display_nameRoom(String idStaff) {
-		lsnr = pb.finding_nameRoom(idStaff);
+		lsnr = pp.finding_nameRoom(idStaff);
 		cb_nameRoom.removeAllItems();
 		for(int i=0; i<lsnr.size(); i++) {
 			int count = 0;
@@ -492,10 +497,17 @@ public class GUI_Bill extends JFrame {
 	}	
 	
 	public void display_idRoom(String nameRoom) {
-		lsidr = pb.finding_idRoom(nameRoom);
+		lsidr = pp.finding_idRoom(nameRoom);
 		cb_idRoom.removeAllItems();
 		for(int i=0; i<lsidr.size(); i++) {
 			cb_idRoom.addItem(lsidr.get(i));
+		}
+	}
+	public void exitForm() {
+		if(jOP_Check.showConfirmDialog(null, "Bạn có muốn thoát không?","Thoát", jOP_Check.YES_NO_CANCEL_OPTION) == 0) {
+			this.setVisible(false);
+			GUI_FrameMain e = new GUI_FrameMain();
+			e.setVisible(true);
 		}
 	}
 }

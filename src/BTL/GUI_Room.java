@@ -33,13 +33,14 @@ import java.awt.event.HierarchyEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class GUI_Room extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tf_idRoom;
 	private JTextField tf_nameRoom;
-	//private JTextField tf_typeRoom;
+	// private JTextField tf_typeRoom;
 	private JTextField tf_priceRoom;
 	private JTextField tf_noteRoom;
 	private JTextField tf_stateRoom;
@@ -47,17 +48,13 @@ public class GUI_Room extends JFrame {
 	DefaultTableModel dtm = new DefaultTableModel();
 	Vector<String> columns = new Vector<>();
 	Vector<Vector<Object>> rows = new Vector<>();
-	Process_Room pr = new Process_Room();
+	Process_Project pp = new Process_Project();
 	ArrayList<Vector<Object>> ls_room = new ArrayList<>();
 	ArrayList<Vector<Object>> ls_idRoom = new ArrayList<>();
-	// JLabel lbkq = new JLabel();
-	JOptionPane jOP_Check = new javax.swing.JOptionPane();
-	JOptionPane jOP_Message = new JOptionPane();
-
 	JComboBox cb_nameStaff;
 	JComboBox cb_nameService;
 	JComboBox cb_idstaff;
-	JComboBox cb_idService ;
+	JComboBox cb_idService;
 	JComboBox cb_typeRoom;
 	String idRoom;
 	String nameRoom;
@@ -78,7 +75,7 @@ public class GUI_Room extends JFrame {
 				try {
 					GUI_Room frame = new GUI_Room();
 					frame.setVisible(true);
-					//frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+					// frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -90,9 +87,11 @@ public class GUI_Room extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI_Room() {
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\room.png"));
 		setTitle("Quản Lý Phòng");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1340, 757);
+		setBounds(100, 100, 1282, 757);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(128, 255, 255));
 		contentPane.setForeground(new Color(255, 255, 255));
@@ -102,8 +101,10 @@ public class GUI_Room extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Danh s\u00E1ch ph\u00F2ng", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(571, 70, 718, 557);
+		panel_2.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				" Danh s\u00E1ch ph\u00F2ng", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		panel_2.setBounds(544, 70, 717, 557);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -118,7 +119,7 @@ public class GUI_Room extends JFrame {
 					tf_idRoom.setText(row.get(0).toString());
 					tf_nameRoom.setText(row.get(1).toString());
 					cb_typeRoom.setSelectedItem(row.get(2).toString());
-					//tf_typeRoom.setText(row.get(2).toString());
+					// tf_typeRoom.setText(row.get(2).toString());
 					tf_priceRoom.setText(row.get(3).toString());
 					tf_stateRoom.setText(row.get(4).toString());
 					tf_noteRoom.setText(row.get(5).toString());
@@ -130,7 +131,7 @@ public class GUI_Room extends JFrame {
 					tf_idRoom.setText("");
 					tf_nameRoom.setText("");
 					cb_typeRoom.setSelectedItem("Normal");
-					//tf_typeRoom.setText("");
+					// tf_typeRoom.setText("");
 					tf_priceRoom.setText("");
 					tf_stateRoom.setText("");
 					tf_noteRoom.setText("");
@@ -139,14 +140,14 @@ public class GUI_Room extends JFrame {
 				}
 			}
 		});
-		tb_room.setBounds(10, 23, 698, 524);
+		tb_room.setBounds(10, 23, 697, 524);
 		panel_2.add(tb_room);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Th\u00F4ng tin ph\u00F2ng", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		panel_3.setBounds(41, 10, 478, 649);
+		panel_3.setBounds(41, 37, 478, 622);
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
 
@@ -171,11 +172,6 @@ public class GUI_Room extends JFrame {
 		tf_nameRoom.setBounds(180, 113, 147, 19);
 		panel_3.add(tf_nameRoom);
 		tf_nameRoom.setColumns(10);
-
-//		tf_typeRoom = new JTextField();
-//		tf_typeRoom.setBounds(180, 149, 147, 19);
-//		panel_3.add(tf_typeRoom);
-//		tf_typeRoom.setColumns(10);
 
 		tf_priceRoom = new JTextField();
 		tf_priceRoom.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -228,8 +224,7 @@ public class GUI_Room extends JFrame {
 				displayIDStaff(nameStaff);
 			}
 		});
-		
-		
+
 		cb_nameStaff.setBounds(180, 307, 147, 21);
 		panel_3.add(cb_nameStaff);
 
@@ -238,7 +233,7 @@ public class GUI_Room extends JFrame {
 		cb_nameService.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				String nameService = cb_nameService.getSelectedItem().toString();
-				
+
 				displayIDService(nameService);
 			}
 		});
@@ -256,24 +251,24 @@ public class GUI_Room extends JFrame {
 		panel_3.add(btn_addRoom);
 		btn_addRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "Do you insert this ?", "Question",
+				if (JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm phòng này?", "Câu hỏi",
 						JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
 					if (insert_Room()) {
-						JOptionPane.showMessageDialog(null, "Successfully Inserted", "Message",
+						JOptionPane.showMessageDialog(null, "Đã thêm phòng thành công!", "Thông báo",
 								JOptionPane.INFORMATION_MESSAGE);
+						clear();
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Insert Failed ! Dữ liệu không hợp lệ", "Message",
-								JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Thêm phòng không thành công ! Dữ liệu không hợp lệ",
+								"Thông báo", JOptionPane.INFORMATION_MESSAGE);
 					}
-					clear();
-					
+
 					getAllRoom();
 				}
 			}
 		});
-		btn_addRoom.setIcon(
-				new ImageIcon("C:\\Users\\Admin\\Downloads\\307250204_598143505384664_999337979866899336_n.png"));
+		btn_addRoom
+				.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\add.png"));
 
 		JButton btn_updateRoom = new JButton("Sửa");
 		btn_updateRoom.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -281,14 +276,14 @@ public class GUI_Room extends JFrame {
 		panel_3.add(btn_updateRoom);
 		btn_updateRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "Do you update this ?", "Question",
+				if (JOptionPane.showConfirmDialog(null, "Bạn có muốn cập nhật thông tin phòng ?", "Câu hỏi",
 						JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
 					if (update_Room()) {
-						JOptionPane.showMessageDialog(null, "Successfully Updated", "Message",
+						JOptionPane.showMessageDialog(null, "Cập nhật thông tin phòng thành công!", "Thông báo",
 								JOptionPane.INFORMATION_MESSAGE);
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Update Failed", "Message",
+						JOptionPane.showMessageDialog(null, "Cập nhật thông tin phòng thất bại!", "Thông báo",
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 					clear();
@@ -297,7 +292,7 @@ public class GUI_Room extends JFrame {
 			}
 		});
 		btn_updateRoom.setIcon(
-				new ImageIcon("C:\\Users\\Admin\\Downloads\\282209823_542515240754482_7892659068093757463_n.png"));
+				new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\update.png"));
 
 		JButton btn_clearRoom = new JButton("Clear");
 		btn_clearRoom.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -309,7 +304,7 @@ public class GUI_Room extends JFrame {
 			}
 		});
 		btn_clearRoom.setIcon(
-				new ImageIcon("C:\\Users\\Admin\\Downloads\\308510366_1141191576788713_363128577687983386_n.png"));
+				new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\clear.png"));
 
 		JButton btn_exitRoom = new JButton("Thoát");
 		btn_exitRoom.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -317,20 +312,11 @@ public class GUI_Room extends JFrame {
 		panel_3.add(btn_exitRoom);
 		btn_exitRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				if (JOptionPane.showConfirmDialog(null, "Do you exit ?", "Question",
-						JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-					if (JOptionPane.YES_NO_OPTION == JOptionPane.YES_OPTION) {
-						close();
-					} else {
-						// jOP_Message.showMessageDialog(null, "Deleted Failed", "Message",
-						// JOptionPane.INFORMATION_MESSAGE);
-					}
-				}
+				close();
 			}
 		});
-		btn_exitRoom.setIcon(
-				new ImageIcon("C:\\Users\\Admin\\Downloads\\282624916_782808416462689_6956084271301932296_n.png"));
+		btn_exitRoom
+				.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\exit.png"));
 
 		JButton btn_deleteRoom = new JButton("Xóa");
 		btn_deleteRoom.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -338,13 +324,13 @@ public class GUI_Room extends JFrame {
 		panel_3.add(btn_deleteRoom);
 		btn_deleteRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				delete_Room();
 				clear();
 			}
 		});
 		btn_deleteRoom.setIcon(
-				new ImageIcon("C:\\Users\\Admin\\Downloads\\307204971_639879121091814_8463331429285439472_n.png"));
+				new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\delete.png"));
 
 		JLabel lblNewLabel_8 = new JLabel("Mã nhân viên");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -355,49 +341,48 @@ public class GUI_Room extends JFrame {
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_9.setBounds(40, 445, 66, 13);
 		panel_3.add(lblNewLabel_9);
-		
+
 		cb_idstaff = new JComboBox();
 		cb_idstaff.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		cb_idstaff.setBounds(180, 352, 147, 21);
 		panel_3.add(cb_idstaff);
-		
+
 		cb_idService = new JComboBox();
 		cb_idService.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		cb_idService.setBounds(180, 441, 147, 21);
 		panel_3.add(cb_idService);
-		
+
 		JButton btn_searchR = new JButton("Search");
 		btn_searchR.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_searchR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(tf_idRoom.getText().equals(""))
-					//findRoomByTypeRoom();
+				if (tf_idRoom.getText().equals(""))
+					// findRoomByTypeRoom();
 					JOptionPane.showConfirmDialog(null, "Vui lòng nhập ID phòng cần tìm", "Thông báo",
-							JOptionPane.CLOSED_OPTION)  ;
-				else if(!findRoomById())
-				{
+							JOptionPane.CLOSED_OPTION);
+				else if (!findRoomById()) {
 					JOptionPane.showConfirmDialog(null, "Không tìm thấy phòng có ID cần tìm", "Thông báo",
-							JOptionPane.CLOSED_OPTION)  ;
+							JOptionPane.CLOSED_OPTION);
 					clear();
 				}
 			}
 		});
 		btn_searchR.setBounds(360, 76, 85, 21);
 		panel_3.add(btn_searchR);
-		
+
 		cb_typeRoom = new JComboBox();
 		cb_typeRoom.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		cb_typeRoom.setModel(new DefaultComboBoxModel(new String[] {"Normal", "VIP"}));
+		cb_typeRoom.setModel(new DefaultComboBoxModel(new String[] { "Normal", "VIP" }));
 		cb_typeRoom.setBounds(180, 152, 147, 19);
 		panel_3.add(cb_typeRoom);
-		
+
 		JButton btn_getList = new JButton("Hiển thị danh sách phòng");
 		btn_getList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getAllRoom();
 			}
 		});
-		btn_getList.setBounds(1142, 29, 147, 21);
+		btn_getList.setBounds(1114, 39, 147, 21);
 		contentPane.add(btn_getList);
 
 		columns.add("Mã Phòng");
@@ -415,8 +400,8 @@ public class GUI_Room extends JFrame {
 
 	private void getAllRoom() {
 		dtm.setNumRows(0);
-		for (int i = 0; i < pr.getListRoom().size(); i++) {
-			Vector<Object> r = (Vector<Object>) pr.getListRoom().get(i);
+		for (int i = 0; i < pp.getListRoom().size(); i++) {
+			Vector<Object> r = (Vector<Object>) pp.getListRoom().get(i);
 			Vector<Object> tbRow = new Vector<>();
 			tbRow.add(r.get(0));
 			tbRow.add(r.get(1));
@@ -428,16 +413,15 @@ public class GUI_Room extends JFrame {
 			tbRow.add(r.get(7));
 			rows.add(tbRow);
 		}
-		
-		
 
 		dtm.setDataVector(rows, columns);
 		dtm.insertRow(0, columns);
 		tb_room.setModel(dtm);
 	}
+
 	public void getCB() {
-		ArrayList<Vector<Object>> ls_room = (ArrayList<Vector<Object>>) pr.getListIdNameStaff();
-		ArrayList<Vector<Object>> ls_service = (ArrayList<Vector<Object>>) pr.getListIdNameService();
+		ArrayList<Vector<Object>> ls_room = (ArrayList<Vector<Object>>) pp.getListIdNameStaff();
+		ArrayList<Vector<Object>> ls_service = (ArrayList<Vector<Object>>) pp.getListIdNameService();
 		cb_nameStaff.removeAllItems();
 		cb_nameService.removeAllItems();
 		for (int i = 0; i < ls_room.size(); i++) {
@@ -447,7 +431,6 @@ public class GUI_Room extends JFrame {
 					if (ls_room.get(i).get(1).equals(ls_room.get(j).get(1))) {
 						count++;
 					}
-
 				}
 				if (count == 0) {
 					cb_nameStaff.addItem(ls_room.get(i).get(0));
@@ -468,22 +451,25 @@ public class GUI_Room extends JFrame {
 			}
 		}
 	}
+
 	public void displayIDStaff(String nameStaff) {
-		ArrayList<Object> ls_idStaff = pr.getListIdStaff(nameStaff);
+		ArrayList<Object> ls_idStaff = pp.getListIdStaff(nameStaff);
 		cb_idstaff.removeAllItems();
-		for(int i=0;i<ls_idStaff.size();i++) {
+		for (int i = 0; i < ls_idStaff.size(); i++) {
 			cb_idstaff.addItem(ls_idStaff.get(i));
 		}
 	}
+
 	public void displayIDService(String nameService) {
-		ArrayList<Object> ls_idService = pr.getListIdService(nameService);
+		ArrayList<Object> ls_idService = pp.getListIdService(nameService);
 		cb_idService.removeAllItems();
-		for(int i=0;i<ls_idService.size();i++) {
+		for (int i = 0; i < ls_idService.size(); i++) {
 			cb_idService.addItem(ls_idService.get(i));
 		}
 	}
+
 	private boolean insert_Room() {
-		//clear();
+		// clear();
 		idRoom = tf_idRoom.getText();
 		nameRoom = tf_nameRoom.getText();
 		typeRoom = cb_typeRoom.getSelectedItem().toString();
@@ -492,7 +478,7 @@ public class GUI_Room extends JFrame {
 		noteRoom = tf_noteRoom.getText();
 		idStaff = cb_idstaff.getSelectedItem().toString();
 		idService = cb_idService.getSelectedItem().toString();
-		boolean insert = pr.insertRoom(idRoom, nameRoom, typeRoom, priceRoom, stateRoom, noteRoom, idStaff, idService);
+		boolean insert = pp.insertRoom(idRoom, nameRoom, typeRoom, priceRoom, stateRoom, noteRoom, idStaff, idService);
 		return insert;
 	}
 
@@ -505,17 +491,17 @@ public class GUI_Room extends JFrame {
 		noteRoom = tf_noteRoom.getText();
 		idStaff = cb_idstaff.getSelectedItem().toString();
 		idService = cb_idService.getSelectedItem().toString();
-		boolean update = pr.updateRoom(idRoom, nameRoom, typeRoom, priceRoom, stateRoom, noteRoom, idStaff, idService);
+		boolean update = pp.updateRoom(idRoom, nameRoom, typeRoom, priceRoom, stateRoom, noteRoom, idStaff, idService);
 		return update;
 	}
 
 	private void delete_Room() {
 		int[] selectedRow = tb_room.getSelectedRows();
-		if(selectedRow.length == 1) {
+		if (selectedRow.length == 1) {
 			idRoom = tf_idRoom.getText();
 			if (JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa phòng này không?", "Xóa phòng",
 					JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-				if (pr.deleteRoom(idRoom)) {
+				if (pp.deleteRoom(idRoom)) {
 					JOptionPane.showMessageDialog(null, "Xóa phòng thành công", "Thông báo",
 							JOptionPane.INFORMATION_MESSAGE);
 
@@ -526,95 +512,76 @@ public class GUI_Room extends JFrame {
 				clear();
 				getAllRoom();
 			}
-			
-		}
-		else {
+
+		} else {
 			if (JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa những phòng này không?", "Xóa nhiều phòng",
 					JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
 				int check = 0;
-				for(int i : selectedRow) {
-					idRoom = rows.get(i-check).get(0).toString();
-					if (pr.deleteRoom(idRoom)) {
+				for (int i : selectedRow) {
+					idRoom = rows.get(i - check).get(0).toString();
+					if (pp.deleteRoom(idRoom)) {
 						getAllRoom();
 						check++;
 					}
 				}
-				if(check > 0) {
+				if (check > 0) {
 					JOptionPane.showMessageDialog(null, "Xóa phòng thành công", "Thông báo",
 							JOptionPane.INFORMATION_MESSAGE);
-					
-						getAllRoom();
-						
-				}
-				else {
+
+					getAllRoom();
+
+				} else {
 					JOptionPane.showMessageDialog(null, "Xóa phòng thất bại", "Thông báo",
 							JOptionPane.INFORMATION_MESSAGE);
-				clear();
-				getAllRoom();
+					clear();
+					getAllRoom();
 				}
 			}
-					
+
 		}
 	}
+
 	private boolean findRoomById() {
 		dtm.setNumRows(0);
 		String idRoom = tf_idRoom.getText();
-		ArrayList<Object> ls_idroom = pr.getListIdRoom();
+		ArrayList<Object> ls_idroom = pp.getListIdRoom();
 		int temp = 0;
-		for(int i =0;i <ls_idroom.size();i++) {
-			if(ls_idroom.get(i).equals(idRoom)) {
+		for (int i = 0; i < ls_idroom.size(); i++) {
+			if (ls_idroom.get(i).equals(idRoom)) {
 				temp++;
 			}
 		}
-		if(temp == 0) {
+		if (temp == 0) {
 			dtm.insertRow(0, columns);
 			return false;
-		}
-		else {
-				Room r = (Room) pr.getRoomById(idRoom);
-				Vector<Object> tbRow = new Vector<>();
-				tbRow.add(r.getIdRoom());
-				tbRow.add(r.getNameRoom());
-				tbRow.add(r.getTypeRoom());
-				tbRow.add(r.getPriceRoom());
-				tbRow.add(r.getNoteRoom());
-				tbRow.add(r.getStateRoom());
-				tbRow.add(r.getIdStaff());
-				tbRow.add(r.getIdService());
-				rows.add(tbRow);
+		} else {
+			Room r = (Room) pp.getRoomById(idRoom);
+			Vector<Object> tbRow = new Vector<>();
+			tbRow.add(r.getIdRoom());
+			tbRow.add(r.getNameRoom());
+			tbRow.add(r.getTypeRoom());
+			tbRow.add(r.getPriceRoom());
+			tbRow.add(r.getNoteRoom());
+			tbRow.add(r.getStateRoom());
+			tbRow.add(r.getIdStaff());
+			tbRow.add(r.getIdService());
+			rows.add(tbRow);
 			dtm.setDataVector(rows, columns);
 			dtm.insertRow(0, columns);
 			tb_room.setModel(dtm);
 			return true;
 		}
-		
-		
 	}
-//	private void findRoomByTypeRoom() {
-//		dtm.setNumRows(0);
-//		String typeRoom = cb_typeRoom.getSelectedItem().toString();
-//		for (int i = 0; i < pr.getRoomByTypeRoom(typeRoom).size(); i++) {
-//			Vector<Object> r = (Vector<Object>) pr.getRoomByTypeRoom(typeRoom).get(i);
-//			Vector<Object> tbRow = new Vector<>();
-//			tbRow.add(r.get(0));
-//			tbRow.add(r.get(1));
-//			tbRow.add(r.get(2));
-//			tbRow.add(r.get(3));
-//			tbRow.add(r.get(4));
-//			tbRow.add(r.get(5));
-//			tbRow.add(r.get(6));
-//			tbRow.add(r.get(7));
-//			rows.add(tbRow);
-//		}
-//		dtm.setDataVector(rows, columns);
-//		dtm.insertRow(0, columns);
-//		tb_room.setModel(dtm);
-//	}
+
 	public void close() {
-		this.setVisible(false);
-		GUI_FrameMain e = new GUI_FrameMain();
-		e.setVisible(true);
+		if (JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát chương trình không?", "Thoát",
+				JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
+			this.setVisible(false);
+			GUI_FrameMain e = new GUI_FrameMain();
+			e.setVisible(true);
+		}
 	}
+
 	private void clear() {
 		tf_idRoom.setEditable(true);
 		tf_idRoom.setText("");

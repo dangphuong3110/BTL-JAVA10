@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
 
-public class Process {
+public class Process_Project {
 	Connection cn;
 	public static Connection getCon() {
 		Connection cn = null;
@@ -101,7 +101,6 @@ public class Process {
 				r.setIdRoom(rs.getString("idRoom"));
 				r.setNameRoom(rs.getString("nameRoom"));
 				r.setTypeRoom(rs.getString("typeRoom"));
-				//int temp = Integer.parseInt(rs.getString("priceRoom"));
 				r.setPriceRoom(rs.getInt("priceRoom"));
 				r.setNoteRoom(rs.getString("noteRoom"));
 				r.setStateRoom(rs.getString("stateRoom"));

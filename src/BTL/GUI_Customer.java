@@ -35,6 +35,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.Toolkit;
 
 public class GUI_Customer extends JFrame {
 
@@ -43,7 +44,7 @@ public class GUI_Customer extends JFrame {
 	private DefaultTableModel dtm = new DefaultTableModel();
 	private Vector<String> columns = new Vector<>();
 	private Vector<Vector<Object>> rows = new Vector<>();
-	private Process_Customer pc = new Process_Customer();
+	private Process_Project pp = new Process_Project();
 	private ArrayList<Vector<Object>> lsc;
 	private ArrayList<String> lsr, lsid;
 	private JTextField tf_idCustomer, tf_nameCustomer, tf_identityCardCustomer, tf_nationalityCustomer, tf_ageCustomer, tf_contactCustomer;
@@ -77,6 +78,7 @@ public class GUI_Customer extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI_Customer() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\customer.png"));
 		setTitle("Quản lý khách hàng");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1124, 648);
@@ -197,7 +199,7 @@ public class GUI_Customer extends JFrame {
 				insertCustomer();
 			}
 		});
-		btn_Insert.setIcon(new ImageIcon("F:\\Meap\\Documents\\TLU-Sophomore2021_2022\\LTWin\\BTL_NguyenDangPhuong_2051063453\\them.png"));
+		btn_Insert.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\add.png"));
 		btn_Insert.setBounds(145, 485, 109, 21);
 		pn_Customer.add(btn_Insert);
 		
@@ -208,7 +210,7 @@ public class GUI_Customer extends JFrame {
 				updateCustomer();
 			}
 		});
-		btn_Update.setIcon(new ImageIcon("F:\\Meap\\Documents\\TLU-Sophomore2021_2022\\LTWin\\BTL_NguyenDangPhuong_2051063453\\icon-sua.png"));
+		btn_Update.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\update.png"));
 		btn_Update.setBounds(264, 485, 103, 21);
 		pn_Customer.add(btn_Update);
 		
@@ -219,7 +221,7 @@ public class GUI_Customer extends JFrame {
 				deleteCustomer();
 			}
 		});
-		btn_Delete.setIcon(new ImageIcon("F:\\Meap\\Documents\\TLU-Sophomore2021_2022\\LTWin\\BTL_NguyenDangPhuong_2051063453\\delete.png"));
+		btn_Delete.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\delete.png"));
 		btn_Delete.setBounds(28, 516, 103, 21);
 		pn_Customer.add(btn_Delete);
 		
@@ -230,7 +232,7 @@ public class GUI_Customer extends JFrame {
 				clearInput();
 			}
 		});
-		btn_Clear.setIcon(new ImageIcon("F:\\Meap\\Documents\\TLU-Sophomore2021_2022\\LTWin\\BTL_NguyenDangPhuong_2051063453\\clear2.png"));
+		btn_Clear.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\clear.png"));
 		btn_Clear.setBounds(145, 516, 109, 21);
 		pn_Customer.add(btn_Clear);
 		
@@ -241,7 +243,7 @@ public class GUI_Customer extends JFrame {
 				exitForm();
 			}
 		});
-		btn_Exit.setIcon(new ImageIcon("F:\\Meap\\Documents\\TLU-Sophomore2021_2022\\LTWin\\BTL_NguyenDangPhuong_2051063453\\icon-xoa.png"));
+		btn_Exit.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\exit.png"));
 		btn_Exit.setBounds(264, 516, 103, 21);
 		pn_Customer.add(btn_Exit);
 		
@@ -362,16 +364,16 @@ public class GUI_Customer extends JFrame {
 	}
 
 	private void getNameRoomToCbb() {
-		lsr = pc.getListNameRoom();
+		lsr = pp.getListNameRoom();
 		cb_nameRoom.removeAllItems();
 		for(int i = 0; i < lsr.size(); i++)
-			if(pc.checkStateRoomA(lsr.get(i)))
+			if(pp.checkStateRoomA(lsr.get(i)))
 				cb_nameRoom.addItem(lsr.get(i));
 	}
 
 	private void getListCustomer() {
 		dtm.setNumRows(0);
-		lsc = pc.getListCustomer();
+		lsc = pp.getListCustomer();
 		for(int i = 0; i < lsc.size(); i++) {
 			Vector<Object> tbRow = lsc.get(i);
 			rows.add(tbRow);
@@ -385,12 +387,12 @@ public class GUI_Customer extends JFrame {
 		if(tf_idCustomer.getText().equals("")) {
 			JOptionPane.showConfirmDialog(null, "Vui lòng nhập ID khách hàng cần tìm!", "Thông báo", JOptionPane.CLOSED_OPTION);
 		}
-		else if(pc.findCustomer_byID(idCustomer).size() == 0) {
+		else if(pp.findCustomer_byID(idCustomer).size() == 0) {
 			jOP_Message.showConfirmDialog(null, "Không có khách hàng cần tìm!", "Thông báo", JOptionPane.CLOSED_OPTION);
 			}
 			else{
 				if(jOP_Check.showConfirmDialog(null, "Bạn có tìm kiếm khách hàng theo mã này?", "Tìm kiếm khách hàng", jOP_Check.YES_NO_CANCEL_OPTION) == 0){
-					Vector<Object> customer = pc.findCustomer_byID(idCustomer);
+					Vector<Object> customer = pp.findCustomer_byID(idCustomer);
 					dtm.setNumRows(0);
 					rows.add(customer);
 					dtm.setDataVector(rows, columns);
@@ -440,7 +442,7 @@ public class GUI_Customer extends JFrame {
 			String dateCheckIn = formatter.format(dc_dateCheckIn.getDate());
 			String dateCheckOut = formatter.format(dc_dateCheckOut.getDate());
 			if(jOP_Check.showConfirmDialog(null, "Bạn có muốn thêm khách hàng này?", "Thêm khách hàng", jOP_Check.YES_NO_CANCEL_OPTION) == 0){
-				if(pc.insertCustomer(idCustomer, nameCustomer, identityCardCustomer, nationalityCustomer, genderCustomer, Integer.parseInt(ageCustomer), contactCustomer, idRoom, dateCheckIn, dateCheckOut) && pc.changedStateRoom(nameRoom, "Unavailable")) {
+				if(pp.insertCustomer(idCustomer, nameCustomer, identityCardCustomer, nationalityCustomer, genderCustomer, Integer.parseInt(ageCustomer), contactCustomer, idRoom, dateCheckIn, dateCheckOut) && pp.changedStateRoom(nameRoom, "Unavailable")) {
 					getListCustomer();
 					getNameRoomToCbb();
 					tf_idCustomer.setText("");
@@ -482,7 +484,7 @@ public class GUI_Customer extends JFrame {
 			int selectedRow = tb_Customer.getSelectedRow();
 			Vector<Object> row = rows.get(selectedRow);
 			if(jOP_Check.showConfirmDialog(null, "Bạn có muốn cập nhật thông tin khách hàng này?", "Cập nhật khách hàng", jOP_Check.YES_NO_CANCEL_OPTION) == 0){
-				if(pc.updateCustomer(idCustomer, nameCustomer, identityCardCustomer, nationalityCustomer, genderCustomer,ageCustomer, contactCustomer, idRoom, dateCheckIn, dateCheckOut) && pc.changedStateRoom(row.get(7).toString(), "Available") && pc.changedStateRoom(nameRoom, "Unavailable")) {
+				if(pp.updateCustomer(idCustomer, nameCustomer, identityCardCustomer, nationalityCustomer, genderCustomer,ageCustomer, contactCustomer, idRoom, dateCheckIn, dateCheckOut) && pp.changedStateRoom(row.get(7).toString(), "Available") && pp.changedStateRoom(nameRoom, "Unavailable")) {
 					getListCustomer();
 					getNameRoomToCbb();
 					tf_idCustomer.setText("");
@@ -510,7 +512,7 @@ public class GUI_Customer extends JFrame {
 		if(selectedRow.length == 1) {
 			if(jOP_Check.showConfirmDialog(null, "Bạn có muốn xóa khách hàng này?","Xóa khách hàng", jOP_Check.YES_NO_CANCEL_OPTION) == 0) {
 				String idCustomer = rows.get(selectedRow[0]).get(0).toString();
-				if(pc.deleteCustomer(idCustomer)) {
+				if(pp.deleteCustomer(idCustomer)) {
 					getListCustomer();
 					getNameRoomToCbb();
 					tf_idCustomer.setText("");
@@ -536,7 +538,7 @@ public class GUI_Customer extends JFrame {
 				int check = 0;
 				for(int i : selectedRow) {
 					String idCustomer = rows.get(i - check).get(0).toString();
-					if(pc.deleteCustomer(idCustomer)) {
+					if(pp.deleteCustomer(idCustomer)) {
 						getListCustomer();
 						getNameRoomToCbb();
 						check++;
@@ -588,14 +590,17 @@ public class GUI_Customer extends JFrame {
 	}
 	
 	public void getIDRoomToCbb(String nameRoom) {
-		lsid = pc.getIDRoom_byNameRoom(nameRoom);
+		lsid = pp.getIDRoom_byNameRoom(nameRoom);
 		cb_idRoom.removeAllItems();
 		for(int i = 0; i < lsid.size(); i++)
 			cb_idRoom.addItem(lsid.get(i));
 	}
 	
 	public void exitForm() {
-		if(jOP_Check.showConfirmDialog(null, "Bạn có muốn thoát chương trình quản lý khách hàng không?","Thoát", jOP_Check.YES_NO_CANCEL_OPTION) == 0)
-			System.exit(0);
+		if(jOP_Check.showConfirmDialog(null, "Bạn có muốn thoát không?","Thoát", jOP_Check.YES_NO_CANCEL_OPTION) == 0) {
+			this.setVisible(false);
+			GUI_FrameMain e = new GUI_FrameMain();
+			e.setVisible(true);
+		}
 	}
 }

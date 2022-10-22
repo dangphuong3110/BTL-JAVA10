@@ -279,6 +279,7 @@ public class GUI_Customer extends JFrame {
 		pn_Customer.add(dc_dateCheckOut);
 		
 		JButton btn_Find = new JButton("Tìm kiếm");
+		btn_Find.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\search.png"));
 		btn_Find.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				findCustomer_byID(tf_idCustomer.getText());

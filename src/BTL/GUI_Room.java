@@ -353,6 +353,7 @@ public class GUI_Room extends JFrame {
 		panel_3.add(cb_idService);
 
 		JButton btn_searchR = new JButton("Search");
+		btn_searchR.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\search.png"));
 		btn_searchR.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_searchR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -367,7 +368,7 @@ public class GUI_Room extends JFrame {
 				}
 			}
 		});
-		btn_searchR.setBounds(360, 76, 85, 21);
+		btn_searchR.setBounds(360, 76, 96, 21);
 		panel_3.add(btn_searchR);
 
 		cb_typeRoom = new JComboBox();

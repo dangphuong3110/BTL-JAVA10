@@ -176,7 +176,7 @@ public class GUI_Service extends JFrame {
 		panel_1.add(btn_Delete);
 
 		JButton btn_Find = new JButton("Tìm kiếm");
-		btn_Find.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\add.png"));
+		btn_Find.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\search.png"));
 		btn_Find.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				findService_byID(tf_idService.getText());

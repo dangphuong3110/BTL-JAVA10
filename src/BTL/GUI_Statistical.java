@@ -165,7 +165,7 @@ public class GUI_Statistical extends JFrame {
 
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton.setBounds(75, 448, 105, 23);
 		panel_1.add(btnNewButton);
 

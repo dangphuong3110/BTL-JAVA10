@@ -237,7 +237,7 @@ public class GUI_Staff extends JFrame {
 		});
 		bt_search.setBounds(315, 49, 108, 30);
 		panel_1.add(bt_search);
-		bt_search.setIcon(new ImageIcon("D:\\Java_62TH5\\Java2022_62TH5\\conssAPP\\BTL_10\\src\\image\\zoom.png"));
+		bt_search.setIcon(new ImageIcon("C:\\Users\\Admin\\Documents\\jav2\\BTL_10\\BTL-JAVA10\\src\\images\\search.png"));
 		bt_search.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		tf_position = new JTextField();
